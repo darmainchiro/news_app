@@ -1,4 +1,4 @@
-package id.ajiguna.newsapp.ui.dashboard
+package id.ajiguna.newsapp.ui.bookmark
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

@@ -1,4 +1,4 @@
-package id.ajiguna.newsapp.ui.dashboard
+package id.ajiguna.newsapp.ui.bookmark
 
 import android.os.Bundle
 import android.view.LayoutInflater
