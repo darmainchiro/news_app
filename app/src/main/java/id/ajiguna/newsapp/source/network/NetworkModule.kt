@@ -1,4 +1,4 @@
-package id.ajiguna.beritaindo.network
+package id.ajiguna.newsapp.source.network
 
 import id.ajiguna.newsapp.utils.Constants
 import okhttp3.OkHttpClient

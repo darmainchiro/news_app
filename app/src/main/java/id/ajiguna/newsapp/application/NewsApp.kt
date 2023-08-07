@@ -6,6 +6,11 @@ import id.ajiguna.beritaindo.network.networkModule
 import id.ajiguna.newsapp.source.news.repositoryModule
 import id.ajiguna.newsapp.ui.home.homeModule
 import id.ajiguna.newsapp.ui.home.homeViewModule
+import id.ajiguna.newsapp.source.database.databaseModule
+import id.ajiguna.newsapp.ui.bookmark.bookmarkModule
+import id.ajiguna.newsapp.ui.bookmark.bookmarkViewModule
+import id.ajiguna.newsapp.ui.detail.detailModule
+import id.ajiguna.newsapp.ui.detail.detailViewModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
 import org.koin.core.context.startKoin
@@ -21,7 +26,12 @@ class NewsApp: Application() {
                 networkModule,
                 repositoryModule,
                 homeModule,
-                homeViewModule
+                homeViewModule,
+                detailViewModule,
+                detailModule,
+                databaseModule,
+                bookmarkModule,
+                bookmarkViewModule
             )
         }
     }

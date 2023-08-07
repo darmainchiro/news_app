@@ -17,16 +17,16 @@ class DetailViewModel(
     val isBookmark by lazy { MutableLiveData(0) }
 
     fun find(articleModel: ArticleModel) {
-//        viewModelScope.launch {
-//            isBookmark.value = repository.find(articleModel)
-//        }
+        viewModelScope.launch {
+            isBookmark.value = repository.find(articleModel)
+        }
     }
 
     fun bookmark(articleModel: ArticleModel){
         viewModelScope.launch {
-//            if (isBookmark.value == 0) repository.save((articleModel))
-//            else repository.remove(articleModel)
-//            find(articleModel)
+            if (isBookmark.value == 0) repository.save((articleModel))
+            else repository.remove(articleModel)
+            find(articleModel)
 
         }
     }
