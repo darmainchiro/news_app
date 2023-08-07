@@ -13,7 +13,7 @@
 
     <fragment
         android:id="@+id/navigation_bookmark"
-        android:name="id.ajiguna.newsapp.ui.bookmark.DashboardFragment"
+        android:name="id.ajiguna.newsapp.ui.bookmark.BookmarkFragment"
         android:label="@string/title_bookmark"
         tools:layout="@layout/fragment_bookmark" />
 </navigation>

@@ -7,11 +7,15 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import id.ajiguna.newsapp.databinding.FragmentDashboardBinding
+import id.ajiguna.newsapp.databinding.FragmentBookmarkBinding
+import org.koin.dsl.module
 
-class DashboardFragment : Fragment() {
+val bookmarkModule = module {
+    factory { BookmarkFragment() }
+}
+class BookmarkFragment : Fragment() {
 
-    private var _binding: FragmentDashboardBinding? = null
+    private var _binding: FragmentBookmarkBinding? = null
 
     // This property is only valid between onCreateView and
     // onDestroyView.
@@ -23,9 +27,9 @@ class DashboardFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         val dashboardViewModel =
-            ViewModelProvider(this).get(DashboardViewModel::class.java)
+            ViewModelProvider(this).get(BookmarkViewModel::class.java)
 
-        _binding = FragmentDashboardBinding.inflate(inflater, container, false)
+        _binding = FragmentBookmarkBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
         val textView: TextView = binding.textDashboard

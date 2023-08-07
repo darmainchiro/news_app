@@ -6,7 +6,7 @@ plugins {
 
 android {
     namespace 'id.ajiguna.newsapp'
-    compileSdk 32
+    compileSdk 33
 
     def localProperties = new Properties()
     localProperties.load(new FileInputStream(rootProject.file("local.properties")))
@@ -19,7 +19,7 @@ android {
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-        buildConfigField("String", 'API_KEY', localProperties['apiKey'])
+        buildConfigField "String", 'API_KEY', localProperties['apiKey']
     }
 
     buildTypes {
@@ -46,8 +46,6 @@ dependencies {
     implementation 'androidx.appcompat:appcompat:1.6.1'
     implementation 'com.google.android.material:material:1.9.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
-    implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.6.1'
-    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.1'
     implementation 'androidx.navigation:navigation-fragment-ktx:2.6.0'
     implementation 'androidx.navigation:navigation-ui-ktx:2.6.0'
     testImplementation 'junit:junit:4.13.2'
@@ -71,7 +69,7 @@ dependencies {
     implementation "io.insert-koin:koin-android:$koin_version"
 
     //Lifecycle
-    def lifecycle_version = "2.3.1"
+    def lifecycle_version = "2.6.1"
     implementation "androidx.lifecycle:lifecycle-livedata-ktx:$lifecycle_version"
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version"
 

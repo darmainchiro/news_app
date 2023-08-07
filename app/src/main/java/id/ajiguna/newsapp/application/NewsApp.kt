@@ -4,6 +4,8 @@ import android.app.Application
 import androidx.appcompat.app.AppCompatDelegate
 import id.ajiguna.beritaindo.network.networkModule
 import id.ajiguna.newsapp.source.news.repositoryModule
+import id.ajiguna.newsapp.ui.home.homeModule
+import id.ajiguna.newsapp.ui.home.homeViewModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
 import org.koin.core.context.startKoin
@@ -17,7 +19,9 @@ class NewsApp: Application() {
             androidContext(this@NewsApp)
             modules(
                 networkModule,
-                repositoryModule
+                repositoryModule,
+                homeModule,
+                homeViewModule
             )
         }
     }

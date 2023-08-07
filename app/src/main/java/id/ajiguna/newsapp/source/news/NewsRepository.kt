@@ -14,8 +14,8 @@ class NewsRepository(
 ) {
     suspend fun fetchHeadline(): NewsModel{
         return api.fetchHeadline(
-            BuildConfig.API_KEY,
-            "us",
+            BuildConfig.BUILD_TYPE,
+            "id",
             1
 
         )
@@ -27,7 +27,7 @@ class NewsRepository(
     ): NewsModel{
 
         return api.fetchNews(
-            BuildConfig.API_KEY,
+            id.ajiguna.newsapp.BuildConfig.API_KEY,
             "id",
             category,
             query,
