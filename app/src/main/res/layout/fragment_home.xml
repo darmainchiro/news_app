@@ -102,7 +102,7 @@
         </androidx.core.widget.NestedScrollView>
 
         <ProgressBar
-            android:visibility="@{viewModel.loading ? view.VISIBLE : view.GONE}"
+            android:visibility="@{viewModel.loadMore ? view.VISIBLE : view.GONE}"
             android:id="@+id/progress_bottom"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
