@@ -22,7 +22,7 @@ class NewsRepository(
 
         return api.fetchNews(
             BuildConfig.API_KEY,
-            "id",
+            "us",
             category,
             query,
             page

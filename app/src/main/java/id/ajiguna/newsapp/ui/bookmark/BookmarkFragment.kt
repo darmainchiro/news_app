@@ -42,8 +42,8 @@ class BookmarkFragment : Fragment() {
 
         binding.listBookmark.adapter = homeAdapter
         viewModel.articles.observe(viewLifecycleOwner) {
-            homeAdapter.setArticle(it)
-
+            homeAdapter.clear()
+            homeAdapter.add(it)
         }
     }
 

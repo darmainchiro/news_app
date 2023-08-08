@@ -1,11 +1,9 @@
 package id.ajiguna.newsapp.ui.home
 
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import id.ajiguna.newsapp.source.news.CategoryModel
-
 import id.ajiguna.newsapp.source.news.NewsModel
 import id.ajiguna.newsapp.source.news.NewsRepository
 import kotlinx.coroutines.launch

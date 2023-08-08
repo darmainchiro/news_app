@@ -3,58 +3,76 @@ package id.ajiguna.newsapp.ui.adapter
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
-import com.bumptech.glide.request.RequestOptions
-import id.ajiguna.newsapp.R
+import id.ajiguna.newsapp.databinding.ItemHeadlineBinding
 import id.ajiguna.newsapp.databinding.ItemNewsBinding
 import id.ajiguna.newsapp.source.news.ArticleModel
 import id.ajiguna.newsapp.utils.DateUtil
 
+
+private const val HEADLINES = 1
+private const val NEWS = 2
+
 class HomeAdapter(
     val articles: ArrayList<ArticleModel>,
     val listener: OnAdapterListener
-): RecyclerView.Adapter<HomeAdapter.HomeViewHolder>() {
+): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
-    fun setArticle(article: List<ArticleModel>) {
-        if (article == null) return
-        this.articles.clear()
-        this.articles.addAll(article)
-        notifyDataSetChanged()
+    companion object {
+        var VIEW_TYPES = HEADLINES
+    }
+
+    class ViewHolderNews(val  binding: ItemNewsBinding): RecyclerView.ViewHolder(binding.root) {
+        fun bind(article: ArticleModel){
+            binding.article = article
+            binding.format = DateUtil()
+        }
+    }
+
+    class ViewHolderHeadlines(val  binding: ItemHeadlineBinding): RecyclerView.ViewHolder(binding.root) {
+        fun bind(article: ArticleModel){
+            binding.article = article
+            binding.format = DateUtil()
+        }
     }
 
     interface OnAdapterListener{
         fun onClick(category: ArticleModel)
     }
 
-    inner class HomeViewHolder(private val  binding: ItemNewsBinding): RecyclerView.ViewHolder(binding.root) {
-        fun bind(article: ArticleModel){
-            with(binding){
-                title.text = article.title
-                publishedAt.text = DateUtil().dateFormat(article.publishedAt)
-                Glide.with(itemView.context)
-                    .load(article.urlToImage)
-                    .apply(
-                        RequestOptions.placeholderOf(R.drawable.ic_loading)
-                            .error(R.drawable.ic_error)
-                    )
-                    .into(image)
-            }
-        }
+    override fun getItemViewType(position: Int) = VIEW_TYPES
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) : RecyclerView.ViewHolder{
+        return if (viewType == HEADLINES){
+            ViewHolderHeadlines(
+                ItemHeadlineBinding.inflate(
+                    LayoutInflater.from(parent.context), parent, false
+                )
+            )
+        } else ViewHolderNews(
+            ItemNewsBinding.inflate(
+                LayoutInflater.from(parent.context), parent, false
+            )
+        )
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HomeViewHolder {
-        val itemNewsBinding =
-            ItemNewsBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return HomeViewHolder(itemNewsBinding)
-    }
-
-    override fun getItemCount(): Int = articles.size
-
-    override fun onBindViewHolder(holder: HomeViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         val article = articles[position]
-        holder.bind(article)
+        if (VIEW_TYPES == HEADLINES)(holder as ViewHolderHeadlines).bind(article)
+        else (holder as ViewHolderNews).bind(article)
         holder.itemView.setOnClickListener{
             listener.onClick(article)
         }
+    }
+
+    override fun getItemCount() = articles.size
+
+    fun add(data: List<ArticleModel>) {
+        articles.addAll(data)
+        notifyItemRangeInserted((articles.size - data.size), data.size)
+    }
+
+    fun clear(){
+        articles.clear()
+        notifyDataSetChanged()
     }
 }

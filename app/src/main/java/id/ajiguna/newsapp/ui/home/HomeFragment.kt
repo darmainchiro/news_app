@@ -45,7 +45,7 @@ class HomeFragment : Fragment() {
         binding.lifecycleOwner = viewLifecycleOwner
         binding.viewModel = viewModel
 
-        bindingToolbar.textTitle.text = viewModel.title
+        bindingToolbar.title = viewModel.title
         bindingToolbar.container.inflateMenu(R.menu.menu_search)
         val menu = binding.toolbar.container.menu
         val search = menu.findItem(R.id.action_search)
@@ -65,12 +65,13 @@ class HomeFragment : Fragment() {
         binding.listCategory.adapter = categoryAdapter
         binding.listNews.adapter = homeAdapter
         viewModel.category.observe(viewLifecycleOwner) {
+            HomeAdapter.VIEW_TYPES = if (it!!.isEmpty()) 1 else 2
             firstLoad()
         }
 
         viewModel.news.observe(viewLifecycleOwner) {
-            if (viewModel.page == 1)
-            homeAdapter.setArticle(it.articles)
+            if (viewModel.page == 1) homeAdapter.clear()
+            homeAdapter.add(it.articles)
         }
 
         viewModel.message.observe(viewLifecycleOwner) {
@@ -81,13 +82,8 @@ class HomeFragment : Fragment() {
 
         binding.scroll.setOnScrollChangeListener {
                 v: NestedScrollView, _, scrollY, _, _ ->
-            if (scrollY == v?.getChildAt(0)!!.measuredHeight - v?.measuredHeight as Int){
-                if (viewModel.page < viewModel.total && viewModel.loadMore.value == false){
-                    viewModel.loadMore
-                    binding.progressBottom.visibility = View.GONE
-                } else {
-                    binding.progressBottom.visibility = View.VISIBLE
-                }
+            if (scrollY == v?.getChildAt(0)!!.measuredHeight - v?.measuredHeight!!){
+                if (viewModel.page < viewModel.total && viewModel.loadMore.value == false) viewModel.fetch()
             }
         }
     }
