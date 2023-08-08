@@ -12,7 +12,7 @@ val repositoryModule = module {
 
 class NewsRepository(
     private val api: ApiClient,
-    private val db: NewsDao
+    val db: NewsDao
 ) {
     suspend fun fetchNews(
         category: String,

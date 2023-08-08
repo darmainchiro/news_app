@@ -14,13 +14,11 @@ class HomeAdapter(
     val articles: ArrayList<ArticleModel>,
     val listener: OnAdapterListener
 ): RecyclerView.Adapter<HomeAdapter.HomeViewHolder>() {
-    private var listArticles = ArrayList<ArticleModel>()
-    var onItemClick: ((ArticleModel) -> Unit)? = null
 
     fun setArticle(article: List<ArticleModel>) {
         if (article == null) return
-        this.listArticles.clear()
-        this.listArticles.addAll(article)
+        this.articles.clear()
+        this.articles.addAll(article)
         notifyDataSetChanged()
     }
 
@@ -42,12 +40,6 @@ class HomeAdapter(
                     .into(image)
             }
         }
-
-        init {
-            binding.root.setOnClickListener {
-                onItemClick?.invoke(listArticles[adapterPosition])
-            }
-        }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HomeViewHolder {
@@ -56,10 +48,13 @@ class HomeAdapter(
         return HomeViewHolder(itemNewsBinding)
     }
 
-    override fun getItemCount(): Int = listArticles.size
+    override fun getItemCount(): Int = articles.size
 
     override fun onBindViewHolder(holder: HomeViewHolder, position: Int) {
-        val product = listArticles[position]
-        holder.bind(product)
+        val article = articles[position]
+        holder.bind(article)
+        holder.itemView.setOnClickListener{
+            listener.onClick(article)
+        }
     }
 }
