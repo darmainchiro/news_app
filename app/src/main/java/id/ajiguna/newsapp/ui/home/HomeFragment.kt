@@ -5,12 +5,10 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.widget.SearchView
 import androidx.core.widget.NestedScrollView
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
 import id.ajiguna.newsapp.R
 import id.ajiguna.newsapp.databinding.CustomToolbarBinding
 import id.ajiguna.newsapp.databinding.FragmentHomeBinding
@@ -44,6 +42,9 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        binding.lifecycleOwner = viewLifecycleOwner
+        binding.viewModel = viewModel
+
         bindingToolbar.textTitle.text = viewModel.title
         bindingToolbar.container.inflateMenu(R.menu.menu_search)
         val menu = binding.toolbar.container.menu
@@ -61,7 +62,7 @@ class HomeFragment : Fragment() {
             }
         })
 
-//        binding.listCategory.adapter = categoryAdapter
+        binding.listCategory.adapter = categoryAdapter
         binding.listNews.adapter = homeAdapter
         viewModel.category.observe(viewLifecycleOwner) {
             firstLoad()

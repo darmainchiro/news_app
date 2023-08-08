@@ -15,7 +15,7 @@
         android:maxLines="1"
         android:maxLength="10"
         tools:text="@string/app_name"
-        android:textColor="@color/red_500"
+        android:textColor="#0c2b5b"
         style="@style/TextAppearance.AppCompat.Widget.ActionBar.Title"
         android:layout_gravity="center"
         tools:ignore="HardcodedText" />

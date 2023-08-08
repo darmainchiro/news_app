@@ -15,7 +15,7 @@ import kotlin.math.ceil
 val homeViewModule = module {
     factory { HomeViewModel(get()) }
 }
-class HomeViewModel(val newsRepository: NewsRepository) : ViewModel() {
+class HomeViewModel(private val newsRepository: NewsRepository) : ViewModel() {
     val title = "Berita"
     val category by lazy { MutableLiveData<String>() }
     val message by lazy { MutableLiveData<String>() }

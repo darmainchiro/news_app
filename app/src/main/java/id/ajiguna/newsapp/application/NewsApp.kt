@@ -2,7 +2,7 @@ package id.ajiguna.newsapp.application
 
 import android.app.Application
 import androidx.appcompat.app.AppCompatDelegate
-import id.ajiguna.beritaindo.network.networkModule
+import id.ajiguna.newsapp.source.network.networkModule
 import id.ajiguna.newsapp.source.news.repositoryModule
 import id.ajiguna.newsapp.ui.home.homeModule
 import id.ajiguna.newsapp.ui.home.homeViewModule
